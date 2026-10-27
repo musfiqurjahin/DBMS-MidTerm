@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1020">
+    <title>DBMS Question Bank | Organized Questions</title>
+    <style>
+        :root {
+            --bg: #080d1b;
+            --panel: rgba(17, 25, 47, .82);
+            --panel2: rgba(23, 34, 61, .88);
+            --text: #eef3ff;
+            --muted: #a8b5d3;
+            --line: rgba(164, 187, 255, .17);
+            --accent: #8b7cff;
+            --accent2: #41d9c5;
+            --shadow: 0 18px 55px rgba(0, 0, 0, .28)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 15px/1.65 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        .ambient {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            background: radial-gradient(ellipse at 15% 10%, #28205c 0, transparent 36%), radial-gradient(ellipse at 85% 28%, #0b4d58 0, transparent 32%), linear-gradient(145deg, #080d1b, #0b1225 58%, #10152a)
+        }
+
+        .orb {
+            position: absolute;
+            width: 36vw;
+            height: 36vw;
+            min-width: 260px;
+            min-height: 260px;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: .25;
+            animation: float 16s ease-in-out infinite alternate;
+            background: #7567ff;
+            top: 12%;
+            left: -12%
+        }
+
+        .orb.two {
+            background: #19cbb5;
+            top: 54%;
+            left: auto;
+            right: -12%;
+            animation-delay: -6s
+        }
+
+        .orb.three {
+            width: 20vw;
+            height: 20vw;
+            min-width: 180px;
+            min-height: 180px;
+            background: #c06cff;
+            top: 70%;
+            left: 35%;
+            animation-delay: -10s;
+            opacity: .12
+        }
+
+        @keyframes float {
+            to {
+                transform: translate(12vw, -5vh) scale(1.18)
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *:before,
+            *:after {
+                animation: none !important;
+                scroll-behavior: auto !important
+            }
+        }
+
+        .wrap {
+            width: min(1120px, calc(100% - 32px));
+            margin: auto
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 0;
+            gap: 14px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-weight: 800;
+            letter-spacing: .2px
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: grid;
+            place-items: center;
+            color: #07111d;
+            font-size: 20px;
+            box-shadow: 0 7px 25px #7567ff44
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .06);
+            color: var(--text);
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-weight: 650;
+            cursor: pointer;
+            transition: .2s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: #8b7cff88;
+            background: rgba(139, 124, 255, .14)
+        }
+
+        .btn.primary {
+            background: linear-gradient(120deg, #8b7cff, #4cceb9);
+            border: 0;
+            color: #07111d
+        }
+
+        .hero {
+            padding: 38px 0 28px
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border: 1px solid #8b7cff55;
+            border-radius: 999px;
+            background: #8b7cff12;
+            color: #c9c1ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.4px;
+            text-transform: uppercase
+        }
+
+        .eyebrow:before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--accent2);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent2)
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 58px);
+            line-height: 1.08;
+            letter-spacing: -1.8px;
+            margin: 20px 0 14px;
+            max-width: 800px
+        }
+
+        h1 span {
+            background: linear-gradient(100deg, #b7adff, #72f0dc);
+            color: transparent;
+            background-clip: text
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 680px;
+            font-size: 16px;
+            margin: 0
+        }
+
+        .stats {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px
+        }
+
+        .stat {
+            border: 1px solid var(--line);
+            background: #ffffff08;
+            border-radius: 13px;
+            padding: 10px 14px;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .stat strong {
+            color: var(--text);
+            font-size: 16px;
+            margin-right: 5px
+        }
+
+        .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            padding: 12px 0;
+            background: linear-gradient(180deg, #080d1bf5, #080d1bdc);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid #ffffff08;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .tools {
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .searchbox {
+            flex: 1;
+            position: relative
+        }
+
+        .searchbox span {
+            position: absolute;
+            left: 14px;
+            top: 9px;
+            color: #98a8cc;
+            font-size: 18px
+        }
+
+        .searchbox input {
+            width: 100%;
+            background: #121b32;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px 14px 12px 42px;
+            color: var(--text);
+            outline: none;
+            font: inherit
+        }
+
+        .searchbox input:focus {
+            border-color: var(--accent)
+        }
+
+        .count {
+            white-space: nowrap;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 240px minmax(0, 1fr);
+            gap: 24px;
+            padding: 26px 0 60px
+        }
+
+        .sidebar {
+            align-self: start;
+            position: sticky;
+            top: 82px;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            border-radius: 18px;
+            padding: 16px;
+            box-shadow: var(--shadow)
+        }
+
+        .side-title {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #8292b8;
+            font-weight: 800;
+            margin: 2px 8px 10px
+        }
+
+        .navlist {
+            display: grid;
+            gap: 5px
+        }
+
+        .navitem {
+            border: 0;
+            text-align: left;
+            background: transparent;
+            color: var(--muted);
+            padding: 10px 11px;
+            border-radius: 10px;
+            cursor: pointer;
+            font: inherit;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            gap: 8px
+        }
+
+        .navitem:hover,
+        .navitem.active {
+            background: #8b7cff1e;
+            color: #f4f2ff
+        }
+
+        .navitem small {
+            color: #8292b8
+        }
+
+        .content {
+            min-width: 0
+        }
+
+        .section {
+            margin-bottom: 30px;
+            scroll-margin-top: 90px
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 12px;
+            margin: 0 0 14px
+        }
+
+        .section-head h2 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: -.5px
+        }
+
+        .section-head p {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        .section-num {
+            color: #9d92ff;
+            font-weight: 800;
+            font-size: 12px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase
+        }
+
+        .qcard {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            border-radius: 17px;
+            padding: 18px 18px 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 28px #0000000b;
+            transition: transform .2s, border-color .2s, background .2s;
+            animation: rise .45s both
+        }
+
+        .qcard:hover {
+            transform: translateY(-2px);
+            border-color: #8b7cff5c;
+            background: var(--panel2)
+        }
+
+        @keyframes rise {
+            from {
+                opacity: 0;
+                transform: translateY(8px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .qtop {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px
+        }
+
+        .qnum {
+            display: grid;
+            place-items: center;
+            min-width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #8b7cff2d, #41d9c51a);
+            border: 1px solid #8b7cff38;
+            color: #c7c0ff;
+            font-weight: 850;
+            font-size: 13px
+        }
+
+        .qtag {
+            font-size: 11px;
+            color: #7ce6d6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 800
+        }
+
+        .qtext {
+            white-space: pre-line;
+            margin: 0;
+            color: #eaf0ff;
+            font-size: 14px;
+            line-height: 1.75
+        }
+
+        .qtext b {
+            color: #fff
+        }
+
+        .cardfoot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px solid #ffffff0c
+        }
+
+        .hint {
+            color: #8292b8;
+            font-size: 11px
+        }
+
+        .copybtn {
+            font-size: 12px;
+            padding: 7px 11px;
+            border-radius: 9px
+        }
+
+        .copybtn.copied {
+            color: #7ce6d6;
+            border-color: #41d9c566
+        }
+
+        .empty {
+            display: none;
+            text-align: center;
+            padding: 45px 20px;
+            color: var(--muted);
+            border: 1px dashed var(--line);
+            border-radius: 16px
+        }
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 22px 0 32px;
+            color: #8190b2;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translate(-50%, 20px);
+            opacity: 0;
+            pointer-events: none;
+            background: #e8fff9;
+            color: #09201e;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 750;
+            box-shadow: var(--shadow);
+            transition: .25s;
+            z-index: 20
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0)
+        }
+
+        @media(max-width:800px) {
+            .layout {
+                grid-template-columns: 1fr;
+                gap: 18px
+            }
+
+            .sidebar {
+                position: static;
+                padding: 12px
+            }
+
+            .navlist {
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 3px
+            }
+
+            .navitem {
+                white-space: nowrap;
+                flex-shrink: 0
+            }
+
+            .side-title {
+                margin-bottom: 8px
+            }
+
+            .hero {
+                padding-top: 26px
+            }
+
+            .toolbar {
+                top: 0
+            }
+
+            .section-head h2 {
+                font-size: 20px
+            }
+        }
+
+        @media(max-width:520px) {
+            .wrap {
+                width: min(100% - 22px, 1120px)
+            }
+
+            .topbar {
+                align-items: flex-start
+            }
+
+            .brand {
+                font-size: 13px
+            }
+
+            .logo {
+                width: 34px;
+                height: 34px
+            }
+
+            .top-actions .btn {
+                padding: 8px 10px;
+                font-size: 12px
+            }
+
+            .hero p {
+                font-size: 14px
+            }
+
+            .tools {
+                flex-wrap: wrap
+            }
+
+            .searchbox {
+                flex-basis: 100%
+            }
+
+            .count {
+                flex: 1
+            }
+
+            .qcard {
+                padding: 14px
+            }
+
+            .qtext {
+                font-size: 13px
+            }
+
+            .section-head {
+                align-items: start;
+                flex-direction: column
+            }
+        }
+
+        /* Mobile reading refinements */
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            overflow-wrap: anywhere
+        }
+
+        button,
+        input {
+            touch-action: manipulation
+        }
+
+        .qtext {
+            overflow-wrap: anywhere;
+            word-break: normal
+        }
+
+        @media(max-width:800px) {
+            .wrap {
+                width: min(100% - 24px, 720px)
+            }
+
+            .layout {
+                display: flex;
+                flex-direction: column;
+                padding-top: 16px;
+                gap: 16px
+            }
+
+            .sidebar {
+                top: 0;
+                z-index: 8;
+                border-radius: 14px;
+                padding: 10px;
+                overflow: hidden
+            }
+
+            .navlist {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overscroll-behavior-x: contain;
+                scrollbar-width: thin;
+                gap: 6px
+            }
+
+            .navitem {
+                flex: 0 0 auto;
+                white-space: nowrap;
+                min-height: 42px;
+                padding: 9px 12px
+            }
+
+            .content {
+                width: 100%;
+                min-width: 0
+            }
+
+            .section {
+                scroll-margin-top: 76px
+            }
+
+            .qcard {
+                border-radius: 14px;
+                margin-bottom: 10px;
+                padding: 15px
+            }
+
+            .qtext {
+                font-size: 15px;
+                line-height: 1.8
+            }
+
+            .cardfoot {
+                align-items: center
+            }
+
+            .copybtn {
+                min-height: 40px;
+                padding: 9px 12px;
+                white-space: nowrap
+            }
+        }
+
+        @media(max-width:520px) {
+            .wrap {
+                width: calc(100% - 20px)
+            }
+
+            .topbar {
+                padding: 14px 0;
+                align-items: center
+            }
+
+            .brand {
+                font-size: 13px;
+                gap: 8px
+            }
+
+            .top-actions {
+                gap: 6px
+            }
+
+            .top-actions .btn {
+                font-size: 12px;
+                padding: 8px 9px;
+                min-height: 36px
+            }
+
+            .hero {
+                padding: 23px 0 20px
+            }
+
+            h1 {
+                font-size: clamp(30px, 9vw, 42px);
+                letter-spacing: -1px;
+                margin: 15px 0 12px
+            }
+
+            .hero p {
+                font-size: 14px;
+                line-height: 1.7
+            }
+
+            .stats {
+                gap: 7px;
+                margin-top: 17px
+            }
+
+            .stat {
+                font-size: 12px;
+                padding: 8px 10px
+            }
+
+            .stat strong {
+                font-size: 14px
+            }
+
+            .toolbar {
+                padding: 9px 0
+            }
+
+            .tools {
+                gap: 8px
+            }
+
+            .searchbox input {
+                font-size: 16px;
+                padding-top: 12px;
+                padding-bottom: 12px
+            }
+
+            .count {
+                font-size: 12px
+            }
+
+            .tools>.btn {
+                padding: 8px 10px
+            }
+
+            .sidebar {
+                padding: 9px
+            }
+
+            .side-title {
+                font-size: 10px
+            }
+
+            .navitem {
+                font-size: 12px;
+                padding: 9px 10px;
+                min-height: 40px
+            }
+
+            .section-head {
+                gap: 5px;
+                margin-bottom: 11px
+            }
+
+            .section-head h2 {
+                font-size: 20px;
+                line-height: 1.3
+            }
+
+            .section-head p {
+                font-size: 12px;
+                line-height: 1.5
+            }
+
+            .qcard {
+                padding: 13px;
+                margin-bottom: 10px
+            }
+
+            .qtop {
+                gap: 8px;
+                margin-bottom: 9px;
+                align-items: center
+            }
+
+            .qnum {
+                min-width: 32px;
+                height: 32px
+            }
+
+            .qtag {
+                font-size: 10px;
+                letter-spacing: .8px
+            }
+
+            .qtext {
+                font-size: 14px;
+                line-height: 1.8
+            }
+
+            .cardfoot {
+                margin-top: 12px;
+                padding-top: 10px;
+                gap: 8px
+            }
+
+            .hint {
+                font-size: 10px;
+                line-height: 1.4
+            }
+
+            .copybtn {
+                font-size: 11px;
+                padding: 8px 9px;
+                min-height: 40px
+            }
+
+            .footer {
+                font-size: 11px;
+                line-height: 1.6
+            }
+        }
+
+        @media(max-width:360px) {
+            .top-actions .btn {
+                font-size: 11px;
+                padding: 7px
+            }
+
+            .brand {
+                font-size: 12px
+            }
+
+            .cardfoot {
+                align-items: flex-start;
+                flex-direction: column
+            }
+
+            .copybtn {
+                width: 100%
+            }
+
+            .stats .stat {
+                flex: 1 1 auto
+            }
+        }
+
+
+        /* HARD FIX: keep every question inside the phone viewport */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: clip;
+        }
+
+        .wrap,
+        .layout,
+        .content,
+        .section,
+        .section-head,
+        .qcard,
+        .qtop,
+        .qtext,
+        .cardfoot,
+        .footer {
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .qcard,
+        .qtext,
+        .qtext * {
+            overflow-wrap: anywhere !important;
+            word-break: break-word;
+        }
+
+        .qtext {
+            white-space: pre-line;
+        }
+
+        img,
+        svg,
+        video,
+        iframe,
+        table,
+        pre,
+        code {
+            max-width: 100%;
+        }
+
+        pre,
+        code {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        @media (max-width: 520px) {
+            .wrap {
+                width: calc(100% - 20px) !important;
+            }
+
+            .layout {
+                width: calc(100% - 20px) !important;
+            }
+
+            .qcard {
+                width: 100%;
+                padding: 12px !important;
+            }
+
+            .qtext {
+                width: 100%;
+                font-size: 14px !important;
+                line-height: 1.75 !important;
+                white-space: pre-line !important;
+                overflow-wrap: anywhere !important;
+                word-break: break-word !important;
+            }
+
+            .qtop {
+                flex-wrap: wrap;
+            }
+
+            .qtag {
+                min-width: 0;
+                overflow-wrap: anywhere;
+            }
+
+            .cardfoot {
+                flex-wrap: wrap;
+            }
+
+            .hint {
+                min-width: 0;
+                overflow-wrap: anywhere;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ambient" aria-hidden="true">
+        <div class="orb"></div>
+        <div class="orb two"></div>
+        <div class="orb three"></div>
+    </div>
+    <header class="wrap topbar">
+        <div class="brand">
+            <div class="logo">✦</div>
+            <div>DBMS <span style="color:#9aa8c9;font-weight:600">/ Question Bank</span></div>
+        </div>
+        <div class="top-actions"><button class="btn" id="backToTop">↑ Top</button><button class="btn primary"
+                id="copyAll">Copy all</button></div>
+    </header>
+    <main class="wrap">
+        <section class="hero">
+            <div class="eyebrow">Study collection · 20 questions</div>
+            <h1>Database concepts,<br><span>organized beautifully.</span></h1>
+            <p>Your DBMS questions, arranged in a clear sequence—from data management approaches and transaction
+                processing to schemas, relational design, and ER diagrams. Copy any question with one tap.</p>
+            <div class="stats">
+                <div class="stat"><strong>20</strong> questions</div>
+                <div class="stat"><strong>5</strong> topic groups</div>
+                <div class="stat"><strong>⌘</strong> one-click copy</div>
+            </div>
+        </section>
+    </main>
+    <div class="toolbar">
+        <div class="wrap tools">
+            <div class="searchbox"><span>⌕</span><input id="search" type="search"
+                    placeholder="Search questions or topics…" aria-label="Search questions"></div>
+            <div class="count" id="count">20 questions shown</div><button class="btn" id="clearSearch">Clear</button>
+        </div>
+    </div>
+    <div class="wrap layout">
+        <aside class="sidebar">
+            <div class="side-title">Browse topics</div>
+            <nav class="navlist" id="navlist">
+                <button class="navitem active" data-target="s1">01 · Data management <small>3</small></button>
+                <button class="navitem" data-target="s2">02 · Independence <small>1</small></button>
+                <button class="navitem" data-target="s3">03 · Transactions <small>2</small></button>
+                <button class="navitem" data-target="s4">04 · Views & schemas <small>6</small></button>
+                <button class="navitem" data-target="s5">05 · Schema & ER design <small>8</small></button>
+            </nav>
+        </aside>
+        <div class="content" id="content">
+            <section class="section" id="s1">
+                <div class="section-head">
+                    <div>
+                        <div class="section-num">Topic 01</div>
+                        <h2>Data management approaches</h2>
+                        <p>File-based systems, DBMS, and cloud-based solutions</p>
+                    </div>
+                </div>
+                <article class="qcard" data-q="1">
+                    <div class="qtop"><span class="qnum">01</span><span class="qtag">File-based vs DBMS</span></div>
+                    <p class="qtext">A district-level grocery chain in Bangladesh keeps stock, sales, and supplier
+                        records in separate Excel files at each branch. Head office cannot combine branch data, and the
+                        same product has different codes in different files.
+
+                        (a) Identify the data management approach being used and its problems.
+                        (b) Compare it with a DBMS-based approach, give 3 advantages and 2 disadvantages.</p>
+                    <div class="cardfoot"><span class="hint">Question 01 · Data management</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="2">
+                    <div class="qtop"><span class="qnum">02</span><span class="qtag">Clinic data systems</span></div>
+                    <p class="qtext">A clinic stores patient records on paper and in local spreadsheets. During a dengue
+                        outbreak, staff cannot quickly list which patients from a district are admitted.
+
+                        (a) Analyze which data management approach is in use.
+                        (b) Compare file-based, DBMS, and cloud-based approaches for this clinic and recommend one with
+                        justification.</p>
+                    <div class="cardfoot"><span class="hint">Question 02 · Data management</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="3">
+                    <div class="qtop"><span class="qnum">03</span><span class="qtag">Data integrity & scaling</span>
+                    </div>
+                    <p class="qtext">A small NGO uses Google Forms + Sheets for relief distribution. As volunteers grow
+                        from 10 to 200, duplicate entries and overwritten data occur daily.
+
+                        (a) Identify the approach and its limitations.
+                        (b) Explain why a DBMS would handle this scenario better.</p>
+                    <div class="cardfoot"><span class="hint">Question 03 · Data management</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+            </section>
+            <section class="section" id="s2">
+                <div class="section-head">
+                    <div>
+                        <div class="section-num">Topic 02</div>
+                        <h2>Data independence</h2>
+                        <p>Separating programs from data storage and structure</p>
+                    </div>
+                </div>
+                <article class="qcard" data-q="4">
+                    <div class="qtop"><span class="qnum">04</span><span class="qtag">Logical & physical
+                            independence</span></div>
+                    <p class="qtext">A university's result-processing software reads data from hardcoded file paths.
+                        When IT moves the data to a new server, every program must be rewritten.
+
+                        (a) Which type of data independence is violated?
+                        (b) Explain how logical and physical data independence in a DBMS would have prevented this.</p>
+                    <div class="cardfoot"><span class="hint">Question 04 · Data independence</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+            </section>
+            <section class="section" id="s3">
+                <div class="section-head">
+                    <div>
+                        <div class="section-num">Topic 03</div>
+                        <h2>Transaction processing</h2>
+                        <p>Concurrency, ACID properties, and consistency</p>
+                    </div>
+                </div>
+                <article class="qcard" data-q="5">
+                    <div class="qtop"><span class="qnum">05</span><span class="qtag">Concurrency control & ACID</span>
+                    </div>
+                    <p class="qtext">A bus company opens 6 ticket counters selling seats for the same trip
+                        simultaneously. Without proper control, the last seat gets sold twice.
+
+                        Explain how multi-user transaction processing (ACID, concurrency control, isolation) keeps seat
+                        counts correct and improves efficiency.</p>
+                    <div class="cardfoot"><span class="hint">Question 05 · Transactions</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="6">
+                    <div class="qtop"><span class="qnum">06</span><span class="qtag">Batch vs transaction
+                            processing</span></div>
+                    <p class="qtext">A bank's batch system locks all accounts during month-end processing, so ATM users
+                        wait for hours.
+
+                        Explain how proper transaction processing improves efficiency and flexibility without losing
+                        consistency.</p>
+                    <div class="cardfoot"><span class="hint">Question 06 · Transactions</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+            </section>
+            <section class="section" id="s4">
+                <div class="section-head">
+                    <div>
+                        <div class="section-num">Topic 04</div>
+                        <h2>Views & three-schema architecture</h2>
+                        <p>Role-based access, abstraction, and data independence</p>
+                    </div>
+                </div>
+                <article class="qcard" data-q="7">
+                    <div class="qtop"><span class="qnum">07</span><span class="qtag">Multiple user views</span></div>
+                    <p class="qtext">A university database is used by students, faculty, the exam controller, and the
+                        DBA.
+
+                        Explain how multiple views benefit each user type. Give one example view per user.</p>
+                    <div class="cardfoot"><span class="hint">Question 07 · Views</span><button class="btn copybtn">Copy
+                            question</button></div>
+                </article>
+                <article class="qcard" data-q="8">
+                    <div class="qtop"><span class="qnum">08</span><span class="qtag">Views & privacy</span></div>
+                    <p class="qtext">A hospital database holds medical history, appointments, and billing.
+
+                        Explain how views (a) protect sensitive data from receptionists, (b) simplify billing staff's
+                        work, and (c) benefit the DBA.</p>
+                    <div class="cardfoot"><span class="hint">Question 08 · Views</span><button class="btn copybtn">Copy
+                            question</button></div>
+                </article>
+                <article class="qcard" data-q="9">
+                    <div class="qtop"><span class="qnum">09</span><span class="qtag">External views</span></div>
+                    <p class="qtext">A garments factory database is accessed by floor supervisors, HR, and top
+                        management, each needing different data granularity.
+
+                        Explain how external views serve each group and why views improve security and simplicity.</p>
+                    <div class="cardfoot"><span class="hint">Question 09 · Views</span><button class="btn copybtn">Copy
+                            question</button></div>
+                </article>
+                <article class="qcard" data-q="10">
+                    <div class="qtop"><span class="qnum">10</span><span class="qtag">Three-schema architecture</span>
+                    </div>
+                    <p class="qtext">For a mobile banking system, illustrate the three-schema architecture: give one
+                        example external view, the conceptual schema (3 - 4 entities), and the internal schema. Explain
+                        the purpose of each level.</p>
+                    <div class="cardfoot"><span class="hint">Question 10 · Three-schema</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="11">
+                    <div class="qtop"><span class="qnum">11</span><span class="qtag">Mappings & change management</span>
+                    </div>
+                    <p class="qtext">A hospital wants to add a new "insurance report" and also migrate storage from one
+                        DBMS to another — without changing existing user applications.
+
+                        Explain how the three-schema architecture and its mappings make both changes possible.</p>
+                    <div class="cardfoot"><span class="hint">Question 11 · Three-schema</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="12">
+                    <div class="qtop"><span class="qnum">12</span><span class="qtag">Architecture diagram</span></div>
+                    <p class="qtext">Draw and explain the three-schema architecture for a railway reservation system.
+                        Clearly show where logical and physical data independence occur.</p>
+                    <div class="cardfoot"><span class="hint">Question 12 · Three-schema</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+            </section>
+            <section class="section" id="s5">
+                <div class="section-head">
+                    <div>
+                        <div class="section-num">Topic 05</div>
+                        <h2>Relational schema & ER design</h2>
+                        <p>Entities, keys, relationships, cardinalities, and weak entities</p>
+                    </div>
+                </div>
+                <article class="qcard" data-q="13">
+                    <div class="qtop"><span class="qnum">13</span><span class="qtag">Library database</span></div>
+                    <p class="qtext">A library maintains members, books, book copies, loans, and fines. A member borrows
+                        multiple books; each copy can be borrowed many times; a fine is recorded per overdue loan.
+
+                        Design the schema. Indicate PKs, FKs, and cardinalities.</p>
+                    <div class="cardfoot"><span class="hint">Question 13 · Relational schema</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="14">
+                    <div class="qtop"><span class="qnum">14</span><span class="qtag">Food delivery database</span></div>
+                    <p class="qtext">An online food delivery system manages customers, restaurants, menu items, orders,
+                        order items, riders, and payments. One order contains multiple items; one rider delivers many
+                        orders.
+
+                        Design the schema with PKs, FKs, and cardinalities.</p>
+                    <div class="cardfoot"><span class="hint">Question 14 · Relational schema</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="15">
+                    <div class="qtop"><span class="qnum">15</span><span class="qtag">University registration</span>
+                    </div>
+                    <p class="qtext">A university registration system manages students, courses, sections, instructors,
+                        and enrollments. Students enroll in many sections; each section is taught by one instructor.
+
+                        Design the schema with PKs, FKs, and cardinalities.</p>
+                    <div class="cardfoot"><span class="hint">Question 15 · Relational schema</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="16">
+                    <div class="qtop"><span class="qnum">16</span><span class="qtag">Hospital database</span></div>
+                    <p class="qtext">A hospital manages patients, doctors, appointments, prescriptions, and medicines.
+                        One appointment produces one prescription; a prescription contains multiple medicines with
+                        dosage.
+
+                        Design the schema with PKs, FKs, and cardinalities.</p>
+                    <div class="cardfoot"><span class="hint">Question 16 · Relational schema</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="17">
+                    <div class="qtop"><span class="qnum">17</span><span class="qtag">Mobile banking database</span>
+                    </div>
+                    <p class="qtext">A mobile banking system manages users, accounts, agents, transactions, and bill
+                        payments. A user has multiple accounts; an agent processes many transactions.
+
+                        Design the schema with PKs, FKs, and cardinalities.</p>
+                    <div class="cardfoot"><span class="hint">Question 17 · Relational schema</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="18">
+                    <div class="qtop"><span class="qnum">18</span><span class="qtag">ER diagram · Coaching center</span>
+                    </div>
+                    <p class="qtext">A coaching center maintains records of students, teachers, batches, and exams. Each
+                        student has a unique student ID, name, phone, and address (house, road, city). Every student is
+                        assigned to exactly one batch; each batch has a batch ID, name, and schedule. Teachers can teach
+                        multiple batches, and each batch is taught by at least one teacher. Each exam has an exam ID,
+                        title, and date. Students may sit for multiple exams, and the marks obtained in each exam must
+                        be recorded. Each exam consists of multiple questions; a question cannot exist without its exam,
+                        and the question number identifies a question only within that exam. Each question stores text,
+                        marks, and answer key.
+
+                        Construct the ER diagram strictly per the requirements. Add any additional
+                        attributes/entities/relationships. Assume any multivalued/composite attribute unless hinted.</p>
+                    <div class="cardfoot"><span class="hint">Question 18 · ER design</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="19">
+                    <div class="qtop"><span class="qnum">19</span><span class="qtag">ER diagram · Hotel chain</span>
+                    </div>
+                    <p class="qtext">A hotel chain maintains hotels, rooms, guests, bookings, and services. Each hotel
+                        has a hotel ID, name, and city. A room is identified by a room number that is unique only within
+                        its hotel; each room stores type and rate. Each guest has a guest ID, name, phone, and address
+                        (street, city). Guests make multiple bookings; each booking has a booking ID, check-in date, and
+                        check-out date, and is for exactly one room. A booking may include multiple services (spa,
+                        laundry); for each service used in a booking, the quantity and charge must be recorded. Each
+                        service has a service ID, name, and unit charge.
+
+                        Construct the ER diagram strictly per the requirements. Add any additional
+                        attributes/entities/relationships. Assume any multivalued/composite attribute unless hinted.</p>
+                    <div class="cardfoot"><span class="hint">Question 19 · ER design</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+                <article class="qcard" data-q="20">
+                    <div class="qtop"><span class="qnum">20</span><span class="qtag">ER diagram · Cricket academy</span>
+                    </div>
+                    <p class="qtext">A cricket academy maintains players, teams, coaches, and matches. Each player has a
+                        player ID, name, date of birth, and contact (phone, email). Every player belongs to exactly one
+                        team; each team has a team ID, name, and home ground. A coach can coach multiple teams, and each
+                        team has exactly one head coach. Each match has a match ID, opponent, date, and venue. Players
+                        may play multiple matches; for every match a player plays, runs scored and wickets taken must be
+                        recorded. Each match consists of multiple innings; an innings cannot exist without its match,
+                        and the innings number identifies an innings only within its match. Each innings stores runs and
+                        overs.
+
+                        Construct the ER diagram strictly per the requirements. Add any additional
+                        attributes/entities/relationships. Assume any multivalued/composite attribute unless hinted.</p>
+                    <div class="cardfoot"><span class="hint">Question 20 · ER design</span><button
+                            class="btn copybtn">Copy question</button></div>
+                </article>
+            </section>
+            <div class="empty" id="empty">No matching questions. Try another keyword.</div>
+        </div>
+    </div>
+    <footer class="wrap footer"><span>DBMS Question Bank · Study smarter, one question at a time.</span><span>Responsive
+            · Searchable · Copy-ready</span></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+    <script>
+        const cards = [...document.querySelectorAll('.qcard')], search = document.getElementById('search'), count = document.getElementById('count'), empty = document.getElementById('empty'), toast = document.getElementById('toast');
+        function update() {const term = search.value.trim().toLowerCase(); let shown = 0; cards.forEach(card => {const match = card.innerText.toLowerCase().includes(term); card.style.display = match ? '' : 'none'; if (match) shown++}); document.querySelectorAll('.section').forEach(s => {s.style.display = [...s.querySelectorAll('.qcard')].some(c => c.style.display !== 'none') ? '' : 'none'}); count.textContent = `${shown} question${shown === 1 ? '' : 's'} shown`; empty.style.display = shown ? 'none' : 'block'}
+        search.addEventListener('input', update); document.getElementById('clearSearch').addEventListener('click', () => {search.value = ''; update(); search.focus()});
+        document.querySelectorAll('.navitem').forEach(btn => btn.addEventListener('click', () => {document.querySelectorAll('.navitem').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.getElementById(btn.dataset.target).scrollIntoView({behavior: 'smooth', block: 'start'})}));
+        function questionText(card) {return card.querySelector('.qtext').innerText.trim()}
+        async function copyText(text) {try {await navigator.clipboard.writeText(text); showToast('Copied to clipboard')} catch (e) {const ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); const ok = document.execCommand('copy'); ta.remove(); showToast(ok ? 'Copied to clipboard' : 'Copy unavailable — select the text manually')} }
+        function showToast(msg) {toast.textContent = msg; toast.classList.add('show'); clearTimeout(window.toastTimer); window.toastTimer = setTimeout(() => toast.classList.remove('show'), 1900)}
+        cards.forEach(card => card.querySelector('.copybtn').addEventListener('click', () => copyText(`Question ${card.dataset.q}\n\n${questionText(card)}`)));
+        document.getElementById('copyAll').addEventListener('click', () => {const visible = cards.filter(c => c.style.display !== 'none'); copyText(visible.map(c => `Question ${c.dataset.q}\n\n${questionText(c)}`).join('\n\n' + '—'.repeat(24) + '\n\n'))});
+        document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+    </script>
+</body>
+
+</html>
